@@ -71,7 +71,7 @@ class _MyHomePageState extends State<MyHomePage> {
           } else {
             player.play();
             Navigator.of(context).push(MaterialPageRoute(
-              builder: (BuildContext context) => const TimeUpClass(),
+              builder: (BuildContext context) => TimeUpClass(player: player),
             ));
             _stopButtonPress();
           }
@@ -109,7 +109,7 @@ class _MyHomePageState extends State<MyHomePage> {
         } else {
           player.play();
           Navigator.of(context).push(MaterialPageRoute(
-            builder: (BuildContext context) => const TimeUpClass(),
+            builder: (BuildContext context) => TimeUpClass(player: player),
           ));
           // player.play();
           _stopButtonPress();

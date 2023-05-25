@@ -1,19 +1,28 @@
 import 'package:flutter/material.dart';
+import 'package:just_audio/just_audio.dart';
 
 class TimeUpClass extends StatelessWidget {
-  const TimeUpClass({Key? key}) : super(key: key);
+  final AudioPlayer player;
+
+  const TimeUpClass({Key? key, required this.player}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-      ),
-      body: Center(
-        child: Text(
-          "Time's Up",
-          style: Theme.of(context).textTheme.headlineLarge,
+    return WillPopScope(
+      onWillPop: () async {
+        await player.stop();
+        return true;
+      },
+      child: Scaffold(
+        appBar: AppBar(
+          backgroundColor: Colors.transparent,
+          elevation: 0,
+        ),
+        body: Center(
+          child: Text(
+            "Time's Up",
+            style: Theme.of(context).textTheme.headlineLarge,
+          ),
         ),
       ),
     );
