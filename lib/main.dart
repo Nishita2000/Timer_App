@@ -55,7 +55,11 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   void _startButtonPress() async {
-    final duration = await player.setAsset('assets/songs/digitalAlarm.wav');
+    if (player.playing) {
+      // Stop the player if it is already playing
+      await player.stop();
+    }
+    await player.setAsset('assets/songs/digitalAlarm.wav');
     if (_isStarted) {
       _stopButtonPress();
     } else {
@@ -69,9 +73,6 @@ class _MyHomePageState extends State<MyHomePage> {
             Navigator.of(context).push(MaterialPageRoute(
               builder: (BuildContext context) => const TimeUpClass(),
             ));
-            // if (_counter == 0) {
-            //   player.play();
-            // }
             _stopButtonPress();
           }
         });
@@ -151,7 +152,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     child: CircularProgressIndicator(
                       strokeWidth: 2,
                       backgroundColor: Colors.grey,
-                      value: _counter / 3600,
+                      value: _counter / 10,
                       color: Colors.blue,
                     ),
                   ),
